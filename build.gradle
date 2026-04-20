@@ -1,0 +1,53 @@
+plugins {
+    id 'java'
+    id 'war'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    junitVersion = '5.13.2'
+}
+
+sourceCompatibility = '17'
+targetCompatibility = '17'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+dependencies {
+    compileOnly('jakarta.servlet:jakarta.servlet-api:6.1.0')
+
+    testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+    implementation 'org.springframework:spring-webmvc:7.0.6'
+
+    implementation("nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.4.0")
+
+    implementation("org.thymeleaf:thymeleaf-spring6:3.1.3.RELEASE")
+    // Source: https://mvnrepository.com/artifact/org.springframework/spring-webmvc
+    implementation("org.springframework:spring-webmvc:7.0.6")
+    // 2. JSP - API
+    // Source: https://mvnrepository.com/artifact/jakarta.servlet.jsp/jakarta.servlet.jsp-api
+    implementation("jakarta.servlet.jsp:jakarta.servlet.jsp-api:3.1.1")
+    // 3. JSTL - API
+    // Source: https://mvnrepository.com/artifact/jakarta.servlet.jsp.jstl/jakarta.servlet.jsp.jstl-api
+    implementation("jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:3.0.2")
+    // 4. JSTL
+    // Source: https://mvnrepository.com/artifact/org.glassfish.web/jakarta.servlet.jsp.jstl
+    runtimeOnly("org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.1")
+    // Source: https://mvnrepository.com/artifact/org.springframework/spring-context
+    implementation("org.springframework:spring-context:7.0.6")
+
+    implementation("jakarta.validation:jakarta.validation-api:3.1.0")
+}
+
+test {
+    useJUnitPlatform()
+}
